@@ -1,69 +1,80 @@
-# Take-home task: Client Onboarding Form
+# Meela Intake Form – Setup & Run Guide
 
-## Background
+This guide will help you set up and run both the backend (Rust/Poem/MongoDB) and frontend (React/Vite) for the Meela Intake Form project.
 
-At Meela, we help match clients to therapists, but first clients need to complete comprehensive intake forms. These
-forms are complex with multiple sections and sensitive mental health questions requiring careful UX.
+---
 
-The forms can take some time to get through. The reality is that sometimes life will demand immediate attention from our
-users such that they do not complete the form in a single sitting and they would benefit from having a partial form
-submission to return to. And that is the crux of this task.
+## Prerequisites
 
-## Objective
+- **Node.js** (v18+ recommended)
+- **npm** (comes with Node.js)
+- **Rust** (https://rustup.rs/)
+- **MongoDB Atlas** account (or local MongoDB instance)
 
-Build a _simple_ client intake form system that supports **partial form submission** with the ability to resume later.
-Like, really simple. Proof-of-concept level. Don't worry about edge-cases or validation. Visit [our
-site](https://app.meelahealth.com) and cherry pick a small amount of different questions that make up your form.
+---
 
-**The main goal**: A user should be able to fill out part of a form, save their progress, and return later to continue
-where they left off.
+## 1. Backend Setup
 
-Dos:
+1. **Configure MongoDB:**
+   - Edit [`backend/.env`](backend/.env) with your MongoDB connection string and database name.
+   - Example:
+     ```
+     MONGO_URL="your-mongodb-connection-string"
+     MONGO_DB="your-db-name"
+     PORT=3005
+     ```
 
-1. **Fork our repo!**
-2. **Multi-step form** at least 3 questions.
-3. **Save progress** - user can save and exit at any point - this can happen automatically, using a timer, or a button.
-   All are fine.
-4. **Resume capability** - user can return and continue from where they left off
+2. **Install Rust dependencies:**
+   ```sh
+   cd meela-assignments/backend
+   cargo build
+   ```
 
-Don'ts:
+3. **Run the backend server:**
+   ```sh
+   cargo run
+   ```
+   - The backend will start on [http://localhost:3005](http://localhost:3005).
 
-1. **No auth required** - having a UUID in a URL is super-good enough!
-2. **No versioning required** - don't worry about handling form schema changes.
-3. **No i18n!** - overkill!
+---
 
-**Time Estimate:** spend _max_ 4-6 hours, please.
+## 2. Frontend Setup
 
-If you do not finish in this time, stop! We can talk about what you did manage to accomplish in that time!
+1. **Install frontend dependencies:**
+   ```sh
+   cd ../frontend
+   npm install
+   ```
 
-## Technology Stack
+2. **Start the frontend dev server:**
+   ```sh
+   npm run dev
+   ```
+   - The frontend will start on [http://localhost:5173](http://localhost:5173) and proxy API requests to the backend.
 
-**Frontend**: Use React or Solid.js (your choice)
+---
 
-**Backend**: Feel free to use the provided Rust code in the `/backend` directory - or butcher it and take what you need.
-We do take into account your prior experience with Rust so if you don't have any: do not worry, we will adapt our
-evaluation accordingly.
+## 3. Usage
 
-**Database**: Must use a database (relational or NoSQL - your choice really and then you might have to make some other
-choices than what has been made in the `/backend` directory)
+- Open [http://localhost:5173](http://localhost:5173) in your browser.
+- Click "Start New Form" to begin a new intake form.
+- To resume, use the form ID from the URL or enter it on the home page.
 
-**API**: GraphQL or REST (your choice)
+---
 
-**Requirements**:
+## Troubleshooting
 
-- Frontend must communicate with a backend
-- Backend must persist data to a database
-  - That means you should **not** save the partial submissions using `localStorage` in the browser!
+- Ensure MongoDB is accessible from your machine.
+- If ports are in use, change them in `.env` (backend) or `vite.config.js` (frontend).
 
-## Deliverables
+---
 
-1. Make the thing work
-2. Tell us how to set it up and run it so we can review it:
-   1. Either write a `.txt`/`.md` file that tells us which invocations of `cargo run`, `npm run dev`, `yarn dev`, ... we have to use, or
-   2. simply provide a `justfile`/`Makefile` for us.
-3. Send us a link to your fork on your github account!
+## Scripts Summary
 
-## GO GO GO! 🌶️🌶️🌶️
+| Directory         | Command         | Purpose                |
+|-------------------|----------------|------------------------|
+| backend           | `cargo run`    | Start backend server   |
+| frontend          | `npm run dev`  | Start frontend (Vite)  |
 
-Remember, focus on the core "resume" functionality - that is what we are evaluating. We look forward to catching up and
-reviewing your submission!
+---
+
