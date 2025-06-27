@@ -58,7 +58,8 @@ This guide will help you set up and run both the backend (Rust/Poem/MongoDB) and
 
 - Open [http://localhost:5173](http://localhost:5173) in your browser.
 - Click "Start New Form" to begin a new intake form.
-- To resume, use the form ID from the URL or enter it on the home page.
+- To resume, use the form ID from the URL you obtained when you clicked "Startnewform" and enter it on the home page.
+- for example "http://localhost:5173/form/4ea367d0-4b7d-46eb-9f43-460bb7c858fc" your  form ID in this case will be "4ea367d0-4b7d-46eb-9f43-460bb7c858fc"
 
 ---
 
